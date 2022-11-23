@@ -1,0 +1,42 @@
+{% extends 'Trip/base.html' %}
+{% load static %}
+
+{% block styles %}
+<!--<title>Регистрация</title>-->
+<link type="text/css" href="{% static 'Trip/css/reg.css' %}" rel="stylesheet">
+{% endblock styles %}
+
+{% block content %}
+
+
+<!--   MAIN     -->
+
+
+    <div class="title_title">
+       <h1>{{ title }}</h1>
+   </div>
+
+    {{ form.non_field_errors }}
+    <form method="post" class="form">
+        {% csrf_token %}
+
+        <ul>
+            {% for f in form %}
+                <li>
+                    {{ f }}
+
+                </li>
+                    {{ f.errors }}
+            {% endfor %}
+            <p style="position: relative; left: 15px; top: 10px;font-size: 70%; font-weight: 700; margin-bottom: 15px">
+                Продолжая, вы принимаете согласие о передаче персональных данных, которые <br>
+                будут использованы исключительно в ваших интересах и будут в безопасности
+            </p>
+
+            <li class="submit_form">
+                <button type="submit">Зарегистрироваться</button>
+            </li>
+        </ul>
+    </form>
+
+{% endblock content %}

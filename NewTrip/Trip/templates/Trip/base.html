@@ -1,0 +1,77 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" href="{% static 'Trip/css/header.css' %}" rel="stylesheet">
+    <title> {{ title }}</title>
+    {% block styles %}{% endblock styles %}
+    <link type="image/png" href="{% static 'Trip/images/geo.png' %}" rel="shortcut icon">
+</head>
+<body>
+
+<!--            HEADER          -->
+
+    {% block header %}
+
+        <div>
+
+        <ul class="ul">
+
+            <div>
+                <li id="logo">
+                    <a href="{% url 'main' %}"><span style="color: #0504ff">New</span><span style="color: white">Way</span></a>
+                </li>
+            </div>
+
+            <div>
+                {% if request.user.is_authenticated %}
+                <li style="margin-right: 100px">
+                    <a href="{% url 'new_trip' %}"> Опубликовать поездку</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'new_trip' %}"> Опубликовать поездку</a>
+                </li>
+                {% endif %}
+            </div>
+
+
+
+            <div>
+                {% if request.user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'logout' %}"> Выйти </a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{% url 'auth' %}"> Войти </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'register' %}"> Регистрация </a>
+                    </li>
+                {% endif %}
+            </div>
+        </ul>
+    </div>
+
+
+    {% endblock header %}
+
+
+
+
+<!--    MAIN        -->
+
+
+
+    {% block content %}
+
+    {% endblock content %}
+
+
+
+</body>
+</html>

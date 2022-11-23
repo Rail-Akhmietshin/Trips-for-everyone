@@ -1,0 +1,78 @@
+{% extends 'Trip/base.html' %}
+{% load static %}
+{% load Trip_tags %}
+
+{% block styles %}
+<!--<title>NewWay - Поиск попутчиков!</title>-->
+<link type="text/css" href="{% static 'Trip/css/main.css' %}" rel="stylesheet">
+
+<meta name="viewport" content="width-device-width">
+    <style>
+        @media (max-width: 1920px) {
+            .wraper {
+                max-width: 1800px;
+            }
+        }
+        @media (max-width: 1200px) {
+            .wraper {
+                max-width: 970px;
+            }
+        }
+        @media (max-width: 992px) {
+            .wraper {
+                max-width: 750px;
+            }
+        }
+        @media (max-width: 768px){
+            .wraper {
+                max-width: none;
+            }
+        }
+    </style>
+{% endblock styles %}
+
+{% block content %}
+
+
+<!--        MAIN        -->
+<div class="wraper">
+    <div class="img">
+        <div class="title_title">
+            <h1>Поездки по самым низким ценам и без комиссий!</h1>
+        </div>
+
+        <form class="forms" action="{% url 'trips' %}" method="get">
+            <div class="oli">
+                <input name="where_from" placeholder="Откуда?" type="text">
+
+                <input name="where" placeholder="Куда?">
+                <input name="when" placeholder="Дата поездки" type="date" min="{% get_date %}" max="2024-01-01"
+                       style="border: 0; padding: 0 15px">
+
+                <button type="submit"></button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!--    FOOTER      -->
+<!--    <div class="wraper_footer">-->
+        <div class="footer">
+            <div>
+
+                Данный сервис использует ваши данные лишь в сугубо-преследуемых вами целях, а именно найти вам
+                необходимую и безопасную поездку и нигде более.
+
+            </div>
+
+        <div>
+
+            <a href="https://vk.com/badtheinside"><i title="Мой Телеграм"><img src="{% static 'Trip/images/telegram.svg' %}" width="32" height="32"></i></a>
+
+            <a href="mailto: rail.akhmietshin@gmail.com"><i title="Моя почта"><img src="{% static 'Trip/images/gmail.svg' %}" width="32" height="32"></i></a>
+
+        </div>
+    </div>
+<!--    <div>-->
+    {% endblock content %}

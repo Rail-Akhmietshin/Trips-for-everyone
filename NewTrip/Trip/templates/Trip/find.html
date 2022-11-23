@@ -1,0 +1,65 @@
+{% extends 'Trip/base.html' %}
+{% load static %}
+{% load Trip_tags %}
+
+
+{% block styles %}
+<link type="text/css" href="{% static 'Trip/css/find.css' %}" rel="stylesheet">
+{% endblock styles %}
+
+<!--   MAIN     -->
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+<!--    <div class="sort">-->
+<!--        <ul>-->
+<!--            <li id="sort_name">Сортировка:</li>-->
+
+<!--            <li id="initial"><a href="#">По времени</a></li>-->
+<!--            <li id="changeable"><a href="#">По цене</a></li>-->
+<!--        </ul>-->
+<!--    </div>-->
+
+        <div class="lists">
+            {% for p in posts %}
+                <div class="inform">
+                    <span class="cities">{{ p.where_from }} - {{ p.where }}</span>
+                    <ul class="table">
+                        <li>Водитель - <dfn>{% username_post_created p.pk %}</dfn></li>
+                        <li>Время выезда - <dfn>{{ p.time_trip }}</dfn></li>
+                        <li>Цена с человека - <dfn>{{ p.cost }}</dfn>р.</li>
+                    </ul>
+
+                    <a href="{{ p.get_absolute_url }}">Подробнее</a>
+
+                </div>
+            {% empty %}
+                <div class="not_auth">
+                    <h1>На данную дату поездок не обнаружено</h1>
+                </div>
+            {% endfor %}
+        </div>
+
+    {% else %}
+        <div class="not_auth">
+            <h1>Если поездок нет, возможно, вы просто не авторизованы</h1>
+        </div>
+    {% endif %}
+
+
+<!--&lt;!&ndash;    FOOTER  &ndash;&gt;-->
+<!--    <nav class="footer_buttons">-->
+<!--        <ul>-->
+<!--            -->
+<!--            <li class="pages_button">-->
+<!--                <a href="?page="></a>-->
+<!--            </li>-->
+<!--            -->
+<!--&lt;!&ndash;            <li><a href="#">2</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;            <li><a href="#">3</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;            <li><a href="#">4</a></li>&ndash;&gt;-->
+<!--        </ul>-->
+<!--    </nav>-->
+
+{% endblock content %}

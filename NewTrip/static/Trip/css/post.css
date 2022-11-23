@@ -1,0 +1,37 @@
+
+
+
+
+/*      MAIN        */
+
+.title_title {
+    display: flex;
+    justify-content: center;
+    margin: 100px 0 50px;
+}
+
+
+.main_inf {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.tbl {
+    border: 5px solid #7BA7AB;
+    border-radius: 20px;
+}
+
+.main_inf li {
+    list-style-type: none;
+    margin: 50px 0 50px 0;
+    font-weight: 700;
+    font-size: 150%;
+
+    font-style: oblique;
+    padding: 5px 10px;
+    background: #7BA7AB;
+    color: white;
+    text-align: center;
+}
+

@@ -1,0 +1,36 @@
+FROM python:3.10.4 as builder
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+WORKDIR /usr/src/NewTrip
+
+
+RUN pip install --upgrade pip
+
+COPY . .
+
+COPY ./requirements.txt .
+RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/NewTrip/wheels -r requirements.txt
+
+
+
+FROM python:3.10.4
+
+
+RUN mkdir -p /home/NewTrip
+
+
+
+ENV HOME=/home/NewTrip
+ENV APP_HOME=/home/NewTrip/web
+RUN mkdir $APP_HOME
+RUN mkdir $APP_HOME/static
+RUN mkdir $APP_HOME/media
+WORKDIR $APP_HOME
+
+COPY --from=builder /usr/src/NewTrip/wheels /wheels
+COPY --from=builder /usr/src/NewTrip/requirements.txt .
+RUN pip install --no-cache /wheels/*
+
+COPY . $APP_HOME

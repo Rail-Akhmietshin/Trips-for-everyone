@@ -1,0 +1,72 @@
+{% extends 'Trip/base.html' %}
+{% load static %}
+
+{% block styles %}
+<!--<title>Публикация поездки</title>-->
+<link type="text/css" href="{% static 'Trip/css/publish.css' %}" rel="stylesheet">
+{% endblock styles %}
+
+
+{% block content %}
+
+        <!--    MAIN    -->
+
+
+   <div style="display: flex; justify-content: center; margin-top: 100px;">
+       <h1>{{ title }}</h1>
+   </div>
+
+    <div class="background_form">
+        <form action="{% url 'new_trip'%}" method="post">
+            {% csrf_token %}
+            <ul class="forms">
+
+                {{ form.non_field_errors }}
+                    <li>
+                        {{ form.where_from}}
+                        {{ form.where_from.errors}}
+                    </li>
+                    <li>
+                        {{ form.where }}
+                        {{ form.where.errors}}
+                    </li>
+
+                    <li>
+                        {{ form.date_trip}}
+                        {{ form.date_trip.errors}}
+                    </li>
+                    <li>
+                        {{ form.time_trip }}
+                        {{ form.time_trip.errors}}
+                    </li>
+                    <li>
+                        {{ form.cost }}
+                        {{ form.cost.errors}}
+                    </li>
+
+
+                    <div class="buttons">
+                        <label for="{{ form.two_people.id_for_label }}"> {{ form.two_people.label }}</label>{{ form.two_people}}
+                        {{ form.two_people.errors}}
+                        <label for="{{ form.empty_baggage.id_for_label }}">{{ form.empty_baggage.label }}</label>{{ form.empty_baggage }}
+                        {{ form.empty_baggage.errors}}
+                        <label for="{{ form.without_animals.id_for_label }}">{{ form.without_animals.label }}</label>{{ form.without_animals }}
+                        {{ form.without_animals.errors}}
+                    </div>
+                    <li>
+                        {{ form.additional_inf }}
+                        {{ form.additional_inf.errors }}
+
+                    </li>
+                    <li>
+                        {{ form.user_id }}
+                    </li>
+                <li class="submit_form">
+                    <button type="submit">Опубликовать</button>
+                </li>
+
+            </ul>
+        </form>
+    </div>
+
+    {% endblock content %}

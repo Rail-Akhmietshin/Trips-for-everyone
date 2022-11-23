@@ -1,0 +1,54 @@
+{% extends 'Trip/base.html' %}
+{% load static %}
+{% load Trip_tags %}
+
+
+{% block styles %}
+<link type="text/css" href="{% static 'Trip/css/post.css' %}" rel="stylesheet">
+{% endblock styles %}
+
+
+{% block content %}
+
+
+<!--        MAIN        -->
+    {% if user.is_authenticated %}
+    <div class="title_title">
+        <h1>Информация о поездке</h1>
+    </div>
+
+
+    <div class="main_inf">
+        <ul class="tbl">
+            <li>{{ post.where_from}} - {{ post.where }}</li>
+            <li>{{ post.date_trip }} в {{ post.time_trip}}</li>
+            <li>{{ post.cost }}р. с одного человека</li>
+            {% if post.two_people and post.empty_baggage and post.without_animals %}
+                    <li>Двое сзади, пустой багажник, без животных</li>
+            {% elif post.two_people and post.empty_baggage %}
+                <li>Двое сзади, пустой багажник</li>
+            {% elif post.two_people and post.without_animals %}
+                <li>Двое сзади, без животных</li>
+            {% elif post.empty_baggage and post.without_animals %}
+                <li>Пустой багажник, без животных</li>
+            {% elif post.two_people %}
+                <li>Двое сзади</li>
+            {% elif post.empty_baggage %}
+                <li>Пустой багажник</li>
+            {% elif post.without_animals %}
+                <li>Без животных</li>
+
+            {% endif %}
+
+
+            {% if post.additional_inf %}
+            <li>{{ post.additional_inf}}</li>
+            {% endif %}
+            <li>
+                {% username_post_created post.pk %}, {% number_phone_post_created post.pk %}
+            </li>
+
+        </ul>
+    </div>
+    {% endif %}
+{% endblock content %}
